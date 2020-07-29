@@ -14,7 +14,7 @@ $input_pass = htmlspecialchars($_POST['pass']);
  * @param String $pass
  * @return array(Bool,String stasus)
  */
-function verify($id, $pass)
+function verify_login($id, $pass)
 {
     // connect
     $dns = 'mysql:dbname=amrs;host=127.0.0.1';
@@ -41,13 +41,13 @@ function verify($id, $pass)
         return array(false, 'Wrong password entered.');
     }
 
-    $_SESSION['user_id'] = $id;
     return array(true, '');
 };
 
-$verify = verify($input_id, $input_pass);
+$verify = verify_login($input_id, $input_pass);
 
 if ($verify[0]) {
+    $_SESSION['user_id'] = $input_id;
     header('Location:timeline.php');
 } else {
     header('Location:Login.php?status=' . $verify[1]);

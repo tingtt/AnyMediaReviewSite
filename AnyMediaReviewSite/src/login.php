@@ -20,16 +20,17 @@ if (isset($_GET['status'])) {
 </head>
 
 <body>
+    <h1 id="title">Login</h1>
     <div id="form">
         <div class="center">
-            <h1 class="title">ログイン</h1>
             <form action="login_check.php" method="post">
                 <!--ユーザー名入力-->
-                <p class="user"><input type=text name=id placeholder="UserID"><?= $user_id ?></p>
+                <input type=text name=id placeholder="User ID"><?= $user_id ?><br>
                 <!--パスワード入力-->
-                <p class="pass"><input type=password name=pass placeholder="Password"></p>
-                <input class="submit" type="submit" value="Login" />
-                <font color='red'><?= $status ?></font>
+                <input type=password name=pass placeholder="Password"><br>
+                <font color='red'><?= $status ?></font><br>
+                <input type="submit" value="Login" />
+                <a href="register.php">Create account</a>
             </form>
         </div>
     </div>
