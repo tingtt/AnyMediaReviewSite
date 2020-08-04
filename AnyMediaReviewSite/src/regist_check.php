@@ -11,10 +11,9 @@ $input_pass = htmlspecialchars($_POST['pass']);
  * Undocumented function
  *
  * @param String $id
- * @param String $pass
  * @return array(Bool,String stasus)
  */
-function verify_regist(String $id, String $pass)
+function verify_regist(String $id)
 {
     // connect
     $dns = 'mysql:dbname=amrs;host=127.0.0.1';
