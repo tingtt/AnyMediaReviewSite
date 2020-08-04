@@ -1,6 +1,19 @@
 <!--ユーザ登録-->
 
 <?php
+
+if (session_status() == PHP_SESSION_DISABLED) {
+    session_start();
+}
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
+
+if (isset($_GET['status'])) {
+    $status = $_GET['status'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,15 +47,14 @@
     const status = document.getElementById("status");
     const submit = document.getElementById("submit");
     pass2.addEventListener('change', () => {
-        if(pass1.value != pass2.value){
+        if (pass1.value != pass2.value) {
             console.log("dismatch");
             status.innerHTML = "Password not match.";
             submit.disabled = true;
-        }else{
+        } else {
             console.log("match");
             status.innerHTML = "";
             submit.disabled = false;
         }
     });
-    
 </script>

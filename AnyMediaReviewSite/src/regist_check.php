@@ -40,12 +40,13 @@ function verify_regist(String $id)
     }
 }
 
-$verify = verify_login($input_id, $input_pass);
+$verify = verify_regist($input_id, $input_pass);
+
+$_SESSION['user_id'] = $input_id;
+$_SESSION['password'] = $input_pass;
 
 if ($verify[0]) {
-    $_SESSION['user_id'] = $input_id;
-    $_SESSION['password'] = $input_pass;
-    header('Location:account_settings.php');
+    header('Location:regist_name.php');
 } else {
     header('Location:register.php?status=' . $verify[1]);
 }
