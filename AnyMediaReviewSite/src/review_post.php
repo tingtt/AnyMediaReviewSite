@@ -5,7 +5,6 @@
 
 <head>
     <title>AMRS</title>
-    <link rel="stylesheet" href="review_post.css" media="all">
 </head>
 
 <body>
@@ -14,7 +13,7 @@
         <form action="" method="post">
             <p>
                 <div>カテゴリー</div>
-                <select name="category">
+                <select id="category">
                     <option value="1">レディース</option>
                     <option value="2">メンズ</option>
                     <option value="3">ベビー・キッズ</option>
@@ -28,9 +27,22 @@
                     <option value="11">その他</option>
                 </select>
             </p>
+
+            <p>
+                <div>商品名</div>
+                <select id="product_name">
+                </select>
+                <button type="button" id="add_btn" value="" name="">＋</button>
+                <div id="parent">
+                    <div id="text_add"></div>
+                </div>
+
+
+            </p>
             <input type="submit" id="review_post" value="投稿" />
         </form>
     </div>
+    <script type="text/javascript" src="js/review_post.js"></script>
 </body>
 
 </html>

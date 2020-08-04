@@ -1,16 +1,18 @@
 <!--タイムライン-->
 
 <!DOCTYPE html>
-    <html lang="ja">
-    <head>
-        <title>AMRS</title>
-        <meta charset="Shift_JIS">
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="timeline.css" media="all">
-    </head>
+<html lang="ja">
 
-    <body>
-        <h1>TimeLine</h1>
-        <p>any</p>
-    </body>
+<head>
+    <title>AMRS</title>
+    <link rel="stylesheet" href="timeline.css" media="all">
+</head>
+
+<body>
+    <h1>TimeLine</h1>
+    <p>
+        <a href="review_post.php" type="button" name="review_post_button">投稿</a>
+    </p>
+</body>
+
 </html>
