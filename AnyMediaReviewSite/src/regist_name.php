@@ -1,31 +1,14 @@
 <?php
+session_start();
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['password'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location:register.php');
 }
 
-function insert_account_info(String $id, String $name, String $pass)
-{
-    // connect
-    $dns = 'mysql:dbname=amrs;host=127.0.0.1';
-    $user = 'root';
-    $password = '';
-    try {
-        $db_handle = new PDO($dns, $user, $password);
-    } catch (PDOexception $th) {
-        return array(false, 'Error: Cannot connect DB');
-    }
-
-    $sql = 'INSERT INTO accounts (id, name, pass) VALUES(?, ?, ?)';
-    $stmt = $db_handle->prepare($sql);
-
-    $flag = $stmt->execute(array($id, $name, $pass));
-
-    if (!$flag) {
-        header('Location:register.php?status=' . "Error: Cannot registration.");
-    }
+if (isset($_POST['name'])) {
+    $_SESSION['name'] = htmlspecialchars($_POST['name']);
+    header('Location:regist_pass.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +21,11 @@ function insert_account_info(String $id, String $name, String $pass)
 
 <body>
     <div class="content">
-        <form action="regist_name" method="post">
+        <form action="regist_name.php" method="post">
             <h3>名前を入力してください。</h3>
-            <input type="text" placeholder="Name">
+            <input type="text" placeholder="Name" name="name">
             <button type="submit">決定</button>
-            <p>※ ここで設定した名前はサイトを利用する時に他のユーザにも表示されます。</p>
+            <p>※ ここで設定した名前は当サイトを使用するときに他のユーザにも表示され、変更可能です。</p>
         </form>
     </div>
 </body>
