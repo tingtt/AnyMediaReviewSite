@@ -2,16 +2,16 @@
 session_start();
 
 // post送信されている場合の処理
-if (isset($_POST['id'])) {
+if (isset($_POST['id']) && isset($_POST['pass'])) {
     $input_id = $_POST['id'];
-    $hashed_pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+    $input_pass = $_POST['pass'];
 
     /**
-     * Undocumented function
+     * ログインチェック
      *
      * @param String $id
      * @param String $pass
-     * @return array(Bool,String) array[1] = Error status
+     * @return array(Bool,String) $array[1] = Error status
      */
     function verify_login($id, $pass)
     {
@@ -35,15 +35,15 @@ if (isset($_POST['id'])) {
         if ($row_num <= 0) {
             return array(false, 'No exist ID entered.');
         }
-        $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-        if ($result[0]['pass'] != $pass) {
+        $result = $prepare->fetch();
+        if (!password_verify($pass, $result['pass'])) {
             return array(false, 'Wrong password entered.');
         }
 
         return array(true, '');
     };
 
-    $verify = verify_login($input_id, $hashed_pass);
+    $verify = verify_login($input_id, $input_pass);
 
     if ($verify[0]) {
         $_SESSION['user_id'] = $input_id;
@@ -67,7 +67,7 @@ if (isset($_GET['status'])) {
 
 <head>
     <title>AMRS - Login</title>
-    <link rel="stylesheet" href="login.css" media="all">
+    <link rel="stylesheet" href="css/login.css" media="all">
 </head>
 
 <body>
@@ -79,7 +79,7 @@ if (isset($_GET['status'])) {
                 <input type=text name=id placeholder="User ID" value="<?= $user_id ?>"><br>
                 <!--パスワード入力-->
                 <input type=password name=pass placeholder="Password"><br>
-                <p color='red'><?= $status ?></p><br>
+                <font color='red'><?= $status ?></font><br>
                 <input type="submit" value="Login" />
                 <a href="register.php">Create account</a>
             </form>
