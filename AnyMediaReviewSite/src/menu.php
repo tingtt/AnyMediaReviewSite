@@ -1,5 +1,9 @@
 <?php
+session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    header('Location:login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +16,8 @@
 
 <body>
     <div class="content">
-
+        <button onclick="location.href='search.php'">探す</button>
+        <button onclick="location.href='review.php'">レビューする</button>
     </div>
 </body>
 
