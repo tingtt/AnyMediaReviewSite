@@ -8,7 +8,7 @@ if (!isset($_SESSION['name'])) {
     header('Locatoin:regist_name.php');
 }
 
-$status;
+$status = "";
 
 /**
  * 入力されたID、名前、パスワード（暗号化済）をデータベースに登録

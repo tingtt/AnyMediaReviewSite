@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$status;
+$status = "";
 
 // post送信されている場合の処理
 if (isset($_POST['id']) && isset($_POST['pass'])) {
