@@ -8,6 +8,8 @@ if (!isset($_SESSION['name'])) {
     header('Locatoin:regist_name.php');
 }
 
+$status;
+
 /**
  * 入力されたID、名前、パスワード（暗号化済）をデータベースに登録
  *
@@ -19,7 +21,7 @@ if (!isset($_SESSION['name'])) {
 function insert_account_info(String $id, String $name, String $pass)
 {
     // connect
-    $dns = 'mysql:dbname=amrs;host=127.0.0.1';
+    $dns = 'mysql:dbname=amrs2;host=127.0.0.1';
     $user = 'root';
     $password = '';
     try {
@@ -28,7 +30,7 @@ function insert_account_info(String $id, String $name, String $pass)
         return array(false, 'Error: Cannot connect DB');
     }
 
-    $sql = 'INSERT INTO accounts (id, name, pass) VALUES(?, ?, ?)';
+    $sql = 'INSERT INTO account (id, name, password) VALUES(?, ?, ?)';
     $stmt = $db_handle->prepare($sql);
 
     $flag = $stmt->execute(array($id, $name, $pass));
@@ -49,7 +51,7 @@ if (isset($_POST['pass'])) {
     if (!$flag[0]) {
         $status = $flag[1];
     } else {
-        header('Location:menu.php');
+        header('Location:login.php');
     }
 }
 

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$status;
+
 // post送信されている場合の処理
 if (isset($_POST['id']) && isset($_POST['pass'])) {
     $input_id = $_POST['id'];
@@ -16,7 +18,7 @@ if (isset($_POST['id']) && isset($_POST['pass'])) {
     function verify_login($id, $pass)
     {
         // connect
-        $dns = 'mysql:dbname=amrs;host=127.0.0.1';
+        $dns = 'mysql:dbname=amrs2;host=127.0.0.1';
         $user = 'root';
         $password = '';
         try {
@@ -25,18 +27,17 @@ if (isset($_POST['id']) && isset($_POST['pass'])) {
             return array(false, 'Error: Cannot connect DB');
         }
 
-        $sql = 'SELECT * FROM accounts WHERE id = :id';
+        $sql = 'SELECT * FROM account WHERE id = ?';
         $prepare = $db_handle->prepare($sql);
-        $prepare->bindValue(':id', $id, PDO::PARAM_STR);
 
-        $prepare->execute();
+        $prepare->execute(array($id));
 
         $row_num = $prepare->rowCount();
         if ($row_num <= 0) {
             return array(false, 'No exist ID entered.');
         }
         $result = $prepare->fetch();
-        if (!password_verify($pass, $result['pass'])) {
+        if (!password_verify($pass, $result['password'])) {
             return array(false, 'Wrong password entered.');
         }
 

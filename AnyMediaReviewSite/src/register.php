@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$status;
+
 // post送信されている場合の処理
 if (isset($_POST['id'])) {
     $input_id = $_POST['id'];
@@ -14,7 +16,7 @@ if (isset($_POST['id'])) {
     function verify_regist(String $id)
     {
         // connect
-        $dns = 'mysql:dbname=amrs;host=127.0.0.1';
+        $dns = 'mysql:dbname=amrs2;host=127.0.0.1';
         $user = 'root';
         $password = '';
         try {
@@ -23,7 +25,7 @@ if (isset($_POST['id'])) {
             return array(false, 'Error: Cannot connect DB');
         }
 
-        $sql = 'SELECT * FROM accounts WHERE id = ?';
+        $sql = 'SELECT * FROM account WHERE id = ?';
         $prepare = $db_handle->prepare($sql);
 
         $prepare->execute(array($id));
